@@ -1,0 +1,66 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  submissions Submission[]
+}
+
+model Exam {
+  id        String   @id @default(cuid())
+  banca     String
+  orgao     String
+  cargo     String
+  dtProva   DateTime
+  nQuestoes Int
+  pesosJson Json?
+  rankings  Ranking[]
+  createdAt DateTime @default(now())
+}
+
+model Ranking {
+  id        String   @id @default(cuid())
+  examId    String
+  exam      Exam     @relation(fields: [examId], references: [id])
+  criadorId String?
+  status    String   @default("ativo")
+  priv      String   @default("publico")
+  adesao    Float?   // proporção estimada de adesão
+  submissions Submission[]
+  cutoffEstimates CutoffEstimate[]
+  createdAt DateTime @default(now())
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  rankingId String
+  ranking   Ranking  @relation(fields: [rankingId], references: [id])
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  gabarito  Json     // array de letras A-D
+  acertos   Int
+  notaBruta Float
+  createdAt DateTime @default(now())
+}
+
+model CutoffEstimate {
+  id        String   @id @default(cuid())
+  rankingId String
+  ranking   Ranking  @relation(fields: [rankingId], references: [id])
+  notaCorte Float
+  p25       Float
+  p50       Float
+  p75       Float
+  metodo    String   @default("beta-binomial-v1")
+  updatedAt DateTime @updatedAt
+}
