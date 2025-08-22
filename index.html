@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nota de Corte | ProvaFoco</title>
+  <meta name="description" content="Calcule sua chance de aprovação com base nas notas de corte anteriores.">
+  <link rel="stylesheet" href="_next/static/css/styles.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="Logo ProvaFoco" width="120">
+    <h1>🎯 Nota de Corte - ProvaFoco</h1>
+    <p>Descubra suas chances com base nos dados estatísticos.</p>
+  </header>
+
+  <main>
+    <section class="formulario">
+      <h2>Calcule sua chance</h2>
+      <form>
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso" name="curso" placeholder="Digite o curso..." required>
+
+        <label for="nota">Sua Nota:</label>
+        <input type="number" id="nota" name="nota" placeholder="Ex: 720" required>
+
+        <button type="submit">Calcular</button>
+      </form>
+    </section>
+
+    <section class="resultado">
+      <h2>Resultado</h2>
+      <p id="mensagem">Preencha os campos e clique em calcular.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 ProvaFoco - Todos os direitos reservados</p>
+  </footer>
+
+  <script src="_next/static/js/main.js"></script>
+</body>
+</html>
